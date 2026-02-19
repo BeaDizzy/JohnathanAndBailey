@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -8,140 +8,159 @@
 <link href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --drizzle: #EAE1DA;
-  --floret: #D8B4B2;
-  --meadow: #5C6D4E;
-  --wreath: #31441E;
-  --melody: #B58974;
-  --petrichor: #693B18;
+:root{
+  --drizzle:#EAE1DA;
+  --meadow:#5C6D4E;
+  --wreath:#31441E;
+  --petrichor:#693B18;
 }
 
-body {
-  margin: 0;
-  background: var(--drizzle);
-  font-family: Georgia, serif;
-  color: var(--petrichor);
-  display: flex;
-  justify-content: center;
-  padding: 60px 15px;
+body{
+  margin:0;
+  background:var(--drizzle);
+  font-family:Georgia, serif;
+  color:var(--petrichor);
+  display:flex;
+  justify-content:center;
+  padding:60px 15px;
 }
 
-/* ===== CARD ===== */
-.card {
-  width: 500px;
-  background: white;
-  position: relative;
-  padding: 170px 70px 170px 70px;
-  text-align: center;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-  overflow: hidden; /* prevents any tiny overflow/cropping artifacts */
+.card{
+  width:500px;
+  background:#fff;
+  position:relative;
+  padding:170px 70px 170px 70px;
+  text-align:center;
+  box-shadow:0 12px 40px rgba(0,0,0,0.08);
+  overflow:hidden;
 }
 
-/* ===== CORNERS ===== */
-.corner-tl { position: absolute; top: 20px; left: 20px; width: 120px; }
-.corner-tr { position: absolute; top: 20px; right: 20px; width: 120px; }
-.corner-bl { position: absolute; bottom: 20px; left: 20px; width: 120px; }
-.corner-br { position: absolute; bottom: 20px; right: 20px; width: 120px; }
+/* ===== CORNER SIZING ===== */
+.corner-tl, .corner-tr, .corner-bl, .corner-br{
+  position:absolute;
+  width:120px;
+  z-index:1;
+  pointer-events:none;
+}
 
-/* ===== DECORATIVE LINES ===== */
-/* Put these BEHIND text so they never cross letters visually */
+/*
+  FIX: align TOP corners using BOTTOM instead of TOP
+  so different transparent padding in the PNG/JPG doesn't matter.
+*/
+.corner-tl{
+  left:20px;
+  bottom: calc(100% - 140px); /* baseline for top corners */
+}
+.corner-tr{
+  right:20px;
+  bottom: calc(100% - 140px); /* same baseline */
+}
+
+/*
+  FIX: align BOTTOM corners using TOP instead of BOTTOM
+*/
+.corner-bl{
+  left:20px;
+  top: calc(100% - 140px);    /* baseline for bottom corners */
+}
+.corner-br{
+  right:20px;
+  top: calc(100% - 140px);    /* same baseline */
+}
+
+/* ===== DECORATIVE LINES (behind text) ===== */
 .decor-top,
-.decor-bottom {
-  position: absolute;
-  left: 50%;
-  width: 60%;
-  z-index: 0;
-  pointer-events: none;
+.decor-bottom{
+  position:absolute;
+  left:50%;
+  width:60%;
+  z-index:0;
+  pointer-events:none;
 }
 
-/* Push top line DOWN so it doesn’t hit WELCOME */
-.decor-top {
-  top: 145px;
-  transform: translateX(-50%);
+.decor-top{
+  top:145px;
+  transform:translateX(-50%);
 }
 
-/* Push bottom line UP a bit */
-.decor-bottom {
-  bottom: 115px;
-  transform: translateX(-50%) rotate(180deg);
+.decor-bottom{
+  bottom:115px;
+  transform:translateX(-50%) rotate(180deg);
 }
 
 /* ===== VERTICAL LINES (CSS) ===== */
 .card::before,
-.card::after {
-  content: "";
-  position: absolute;
-  top: 210px;
-  bottom: 210px;
-  width: 1px;
-  background: rgba(105,59,24,0.35);
-  z-index: 0;
+.card::after{
+  content:"";
+  position:absolute;
+  top:210px;
+  bottom:210px;
+  width:1px;
+  background:rgba(105,59,24,0.35);
+  z-index:0;
 }
-.card::before { left: 45px; }
-.card::after  { right: 45px; }
+.card::before{ left:55px; }   /* moved slightly inward */
+.card::after { right:55px; }  /* moved slightly inward */
 
-/* ===== TEXT LAYERS ABOVE DECOR ===== */
-h1, .small, .tree, .names, .date, .footer {
-  position: relative;
-  z-index: 2;
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: 6px;
-  margin: 0 0 34px;
-  color: var(--wreath);
+/* ===== TEXT ON TOP ===== */
+h1, .small, .tree, .names, .date, .footer{
+  position:relative;
+  z-index:2;
 }
 
-.small {
-  font-size: 12px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  opacity: 0.7;
-  margin-bottom: 28px;
+h1{
+  font-size:56px;
+  letter-spacing:6px;
+  margin:0 0 34px;
+  color:var(--wreath);
 }
 
-.tree {
-  width: 90%;
-  opacity: 0.12;
-  margin: 30px auto;
-  display: block;
+.small{
+  font-size:12px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  opacity:0.7;
+  margin-bottom:28px;
 }
 
-/* Names in Monsieur La Doulaise */
-.names {
-  font-family: 'Monsieur La Doulaise', cursive;
-  font-size: 78px;
-  margin-top: -205px;
-  line-height: 0.82;
-  color: var(--wreath);
+.tree{
+  width:90%;
+  opacity:0.12;
+  margin:30px auto;
+  display:block;
 }
 
-/* DATE FIX: move it UP and reduce spacing so it won’t clip */
-.date {
-  margin-top: 185px;
-  font-size: 20px;
-  letter-spacing: 2px;
-  color: var(--meadow);
+.names{
+  font-family:'Monsieur La Doulaise', cursive;
+  font-size:78px;
+  margin-top:-205px;
+  line-height:0.82;
+  color:var(--wreath);
 }
 
-.footer {
-  margin-top: 44px;
-  font-size: 12px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  opacity: 0.6;
+.date{
+  margin-top:185px;
+  font-size:20px;
+  letter-spacing:2px;
+  color:var(--meadow);
 }
 
-/* Responsive */
-@media (max-width: 520px) {
-  .card { width: 100%; padding: 150px 40px 150px 40px; }
-  h1 { font-size: 44px; }
-  .names { font-size: 62px; margin-top: -185px; }
-  .date { margin-top: 170px; }
-  .decor-top { top: 130px; }
-  .decor-bottom { bottom: 105px; }
+.footer{
+  margin-top:44px;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:0.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:520px){
+  .card{ width:100%; padding:150px 40px 150px 40px; }
+  h1{ font-size:44px; }
+  .names{ font-size:62px; margin-top:-185px; }
+  .date{ margin-top:170px; }
+  .decor-top{ top:130px; }
+  .decor-bottom{ bottom:105px; }
 }
 </style>
 </head>
@@ -174,9 +193,7 @@ h1 {
 
   <div class="date">October 12, 2026</div>
 
-  <div class="footer">
-    THANK YOU FOR CELEBRATING WITH US!
-  </div>
+  <div class="footer">THANK YOU FOR CELEBRATING WITH US!</div>
 
 </div>
 
