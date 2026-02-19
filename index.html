@@ -35,40 +35,42 @@ body{
   overflow:hidden;
 }
 
-/* ===== CORNER SIZING ===== */
-.corner-tl, .corner-tr, .corner-bl, .corner-br{
+/* ===== CORNERS ===== */
+
+.corner-tl,
+.corner-tr,
+.corner-bl,
+.corner-br{
   position:absolute;
   width:120px;
   z-index:1;
   pointer-events:none;
 }
 
-/*
-  FIX: align TOP corners using BOTTOM instead of TOP
-  so different transparent padding in the PNG/JPG doesn't matter.
-*/
+/* TOP CORNERS (force visual alignment) */
 .corner-tl{
+  top:20px;
   left:20px;
-  bottom: calc(100% - 140px); /* baseline for top corners */
 }
+
 .corner-tr{
+  top:20px;
   right:20px;
-  bottom: calc(100% - 140px); /* same baseline */
+  transform: translateY(6px); /* adjust this number if needed */
 }
 
-/*
-  FIX: align BOTTOM corners using TOP instead of BOTTOM
-*/
+/* BOTTOM CORNERS (already aligned) */
 .corner-bl{
+  bottom:20px;
   left:20px;
-  top: calc(100% - 140px);    /* baseline for bottom corners */
-}
-.corner-br{
-  right:20px;
-  top: calc(100% - 140px);    /* same baseline */
 }
 
-/* ===== DECORATIVE LINES (behind text) ===== */
+.corner-br{
+  bottom:20px;
+  right:20px;
+}
+
+/* ===== DECORATIVE LINES ===== */
 .decor-top,
 .decor-bottom{
   position:absolute;
@@ -88,7 +90,7 @@ body{
   transform:translateX(-50%) rotate(180deg);
 }
 
-/* ===== VERTICAL LINES (CSS) ===== */
+/* ===== VERTICAL LINES ===== */
 .card::before,
 .card::after{
   content:"";
@@ -99,10 +101,11 @@ body{
   background:rgba(105,59,24,0.35);
   z-index:0;
 }
-.card::before{ left:55px; }   /* moved slightly inward */
-.card::after { right:55px; }  /* moved slightly inward */
+.card::before{ left:55px; }
+.card::after { right:55px; }
 
-/* ===== TEXT ON TOP ===== */
+/* ===== TEXT ===== */
+
 h1, .small, .tree, .names, .date, .footer{
   position:relative;
   z-index:2;
@@ -153,14 +156,11 @@ h1{
   opacity:0.6;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width:520px){
   .card{ width:100%; padding:150px 40px 150px 40px; }
   h1{ font-size:44px; }
   .names{ font-size:62px; margin-top:-185px; }
   .date{ margin-top:170px; }
-  .decor-top{ top:130px; }
-  .decor-bottom{ bottom:105px; }
 }
 </style>
 </head>
@@ -169,22 +169,19 @@ h1{
 
 <div class="card">
 
-  <!-- CORNERS -->
-  <img class="corner-tl" src="BLT.PNG" alt="">
-  <img class="corner-tr" src="BRT.jpg" alt="">
-  <img class="corner-bl" src="BLB.jpg" alt="">
-  <img class="corner-br" src="BRB.jpg" alt="">
+  <img class="corner-tl" src="BLT.PNG">
+  <img class="corner-tr" src="BRT.jpg">
+  <img class="corner-bl" src="BLB.jpg">
+  <img class="corner-br" src="BRB.jpg">
 
-  <!-- DECORATIVE LINES -->
-  <img class="decor-top" src="DecorLine.PNG" alt="">
-  <img class="decor-bottom" src="DecorLine.PNG" alt="">
+  <img class="decor-top" src="DecorLine.PNG">
+  <img class="decor-bottom" src="DecorLine.PNG">
 
-  <!-- CONTENT -->
   <h1>WELCOME</h1>
 
   <div class="small">TO THE WEDDING OF</div>
 
-  <img class="tree" src="Tree.PNG" alt="">
+  <img class="tree" src="Tree.PNG">
 
   <div class="names">
     Bailey<br>
