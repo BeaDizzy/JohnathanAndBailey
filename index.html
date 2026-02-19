@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Johnathan & Bailey</title>
+
+<style>
+
+/* ===== COLOR PALETTE ===== */
+
+:root {
+  --drizzle: #EAE1DA;
+  --floret: #D8B4B2;
+  --meadow: #5C6D4E;
+  --wreath: #31441E;
+  --melody: #B58974;
+  --petrichor: #693B18;
+}
+
+body {
+  margin: 0;
+  background: var(--drizzle);
+  font-family: Georgia, serif;
+  color: var(--petrichor);
+  display: flex;
+  justify-content: center;
+  padding: 60px 15px;
+}
+
+/* ===== MAIN CARD ===== */
+
+.card {
+  width: 500px;
+  background: white;
+  position: relative;
+  padding: 120px 70px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+/* ===== CORNERS ===== */
+
+.corner-tl {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+}
+
+.corner-tr {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 120px;
+}
+
+.corner-bl {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 120px;
+}
+
+.corner-br {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 120px;
+}
+
+/* ===== DECORATIVE LINES ===== */
+
+.decor-top {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65%;
+}
+
+.decor-bottom {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  width: 65%;
+}
+
+/* ===== SIDE LINES ===== */
+
+.line-left {
+  position: absolute;
+  top: 140px;
+  bottom: 140px;
+  left: 40px;
+  width: 2px;
+}
+
+.line-right {
+  position: absolute;
+  top: 140px;
+  bottom: 140px;
+  right: 40px;
+  width: 2px;
+}
+
+/* ===== TEXT ===== */
+
+h1 {
+  font-size: 56px;
+  letter-spacing: 6px;
+  margin-bottom: 25px;
+  color: var(--wreath);
+}
+
+.small {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+
+.tree {
+  width: 90%;
+  opacity: 0.12;
+  margin: 25px auto;
+  display: block;
+}
+
+.names {
+  font-size: 44px;
+  margin-top: -160px;
+  position: relative;
+  z-index: 2;
+  color: var(--wreath);
+}
+
+.date {
+  margin-top: 170px;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--meadow);
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 520px) {
+  .card {
+    width: 100%;
+    padding: 100px 40px;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .names {
+    font-size: 36px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- CORNERS -->
+  <img class="corner-tl" src="BLT.PNG">
+  <img class="corner-tr" src="BRT.jpg">
+  <img class="corner-bl" src="BLB.jpg">
+  <img class="corner-br" src="BRB.jpg">
+
+  <!-- DECORATIVE LINES -->
+  <img class="decor-top" src="DLine.PNG">
+  <img class="decor-bottom" src="DLine.PNG">
+
+  <!-- SIDE STRAIGHT LINES -->
+  <img class="line-left" src="Line.PNG">
+  <img class="line-right" src="Line.PNG">
+
+  <!-- CONTENT -->
+  <h1>WELCOME</h1>
+
+  <div class="small">TO THE WEDDING OF</div>
+
+  <img class="tree" src="Tree.PNG">
+
+  <div class="names">
+    Bailey<br>
+    Johnathan
+  </div>
+
+  <div class="date">October 12, 2026</div>
+
+  <div class="footer">
+    Thank you for celebrating with us!
+  </div>
+
+</div>
+
+</body>
+</html>
