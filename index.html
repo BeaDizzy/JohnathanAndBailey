@@ -1,16 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Johnathan & Bailey</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
 
 <style>
-
-/* ===== COLOR PALETTE ===== */
 :root {
   --drizzle: #EAE1DA;
   --floret: #D8B4B2;
@@ -35,9 +32,10 @@ body {
   width: 500px;
   background: white;
   position: relative;
-  padding: 160px 70px 160px 70px; /* MORE breathing room */
+  padding: 170px 70px 170px 70px;
   text-align: center;
   box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  overflow: hidden; /* prevents any tiny overflow/cropping artifacts */
 }
 
 /* ===== CORNERS ===== */
@@ -47,42 +45,52 @@ body {
 .corner-br { position: absolute; bottom: 20px; right: 20px; width: 120px; }
 
 /* ===== DECORATIVE LINES ===== */
-.decor-top {
-  position: absolute;
-  top: 120px;  /* moved down */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-}
-
+/* Put these BEHIND text so they never cross letters visually */
+.decor-top,
 .decor-bottom {
   position: absolute;
-  bottom: 120px; /* moved up */
   left: 50%;
-  transform: translateX(-50%) rotate(180deg);
   width: 60%;
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* ===== VERTICAL LINES ===== */
+/* Push top line DOWN so it doesn’t hit WELCOME */
+.decor-top {
+  top: 145px;
+  transform: translateX(-50%);
+}
+
+/* Push bottom line UP a bit */
+.decor-bottom {
+  bottom: 115px;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+/* ===== VERTICAL LINES (CSS) ===== */
 .card::before,
 .card::after {
   content: "";
   position: absolute;
-  top: 200px;
-  bottom: 200px;
+  top: 210px;
+  bottom: 210px;
   width: 1px;
-  background: rgba(105,59,24,0.4);
+  background: rgba(105,59,24,0.35);
+  z-index: 0;
 }
-
 .card::before { left: 45px; }
-.card::after { right: 45px; }
+.card::after  { right: 45px; }
 
-/* ===== TEXT ===== */
+/* ===== TEXT LAYERS ABOVE DECOR ===== */
+h1, .small, .tree, .names, .date, .footer {
+  position: relative;
+  z-index: 2;
+}
 
 h1 {
   font-size: 56px;
   letter-spacing: 6px;
-  margin-bottom: 40px; /* more space under welcome */
+  margin: 0 0 34px;
   color: var(--wreath);
 }
 
@@ -91,7 +99,7 @@ h1 {
   letter-spacing: 4px;
   text-transform: uppercase;
   opacity: 0.7;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .tree {
@@ -101,148 +109,40 @@ h1 {
   display: block;
 }
 
-/* ===== NAMES ===== */
+/* Names in Monsieur La Doulaise */
 .names {
   font-family: 'Monsieur La Doulaise', cursive;
-  font-size: 75px;
-  margin-top: -190px;
-  position: relative;
-  z-index: 2;
+  font-size: 78px;
+  margin-top: -205px;
+  line-height: 0.82;
   color: var(--wreath);
-  line-height: 0.85;
 }
 
+/* DATE FIX: move it UP and reduce spacing so it won’t clip */
 .date {
-  margin-top: 200px;
+  margin-top: 185px;
   font-size: 20px;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   color: var(--meadow);
 }
 
 .footer {
-  margin-top: 40px;
+  margin-top: 44px;
   font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
   opacity: 0.6;
 }
 
-/* ===== RESPONSIVE ===== */
+/* Responsive */
 @media (max-width: 520px) {
-  .card { width: 100%; padding: 140px 40px; }
+  .card { width: 100%; padding: 150px 40px 150px 40px; }
   h1 { font-size: 44px; }
-  .names { font-size: 60px; }
+  .names { font-size: 62px; margin-top: -185px; }
+  .date { margin-top: 170px; }
+  .decor-top { top: 130px; }
+  .decor-bottom { bottom: 105px; }
 }
-  color: var(--petrichor);
-  display: flex;
-  justify-content: center;
-  padding: 60px 15px;
-}
-
-/* ===== CARD ===== */
-.card {
-  width: 500px;
-  background: white;
-  position: relative;
-  padding: 120px 70px;
-  text-align: center;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-}
-
-/* ===== CORNERS ===== */
-.corner-tl { position: absolute; top: 20px; left: 20px; width: 120px; }
-.corner-tr { position: absolute; top: 20px; right: 20px; width: 120px; }
-.corner-bl { position: absolute; bottom: 20px; left: 20px; width: 120px; }
-.corner-br { position: absolute; bottom: 20px; right: 20px; width: 120px; }
-
-/* ===== DECORATIVE LINES ===== */
-.decor-top {
-  position: absolute;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 65%;
-}
-
-.decor-bottom {
-  position: absolute;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%) rotate(180deg);
-  width: 65%;
-}
-
-/* ===== VERTICAL LINES (CSS) ===== */
-.card::before,
-.card::after {
-  content: "";
-  position: absolute;
-  top: 140px;
-  bottom: 140px;
-  width: 1px;
-  background: rgba(105,59,24,0.4);
-}
-
-.card::before { left: 45px; }
-.card::after { right: 45px; }
-
-/* ===== TEXT ===== */
-
-h1 {
-  font-size: 56px;
-  letter-spacing: 6px;
-  margin-bottom: 25px;
-  color: var(--wreath);
-}
-
-.small {
-  font-size: 12px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  opacity: 0.7;
-  margin-bottom: 15px;
-}
-
-.tree {
-  width: 90%;
-  opacity: 0.12;
-  margin: 25px auto;
-  display: block;
-}
-
-/* ===== NAMES IN MONSIEUR LA DOULAISE ===== */
-.names {
-  font-family: 'Monsieur La Doulaise', cursive;
-  font-size: 70px;
-  margin-top: -170px;
-  position: relative;
-  z-index: 2;
-  color: var(--wreath);
-  line-height: 0.9;
-}
-
-.date {
-  margin-top: 180px;
-  font-size: 18px;
-  letter-spacing: 4px;
-  color: var(--meadow);
-}
-
-.footer {
-  margin-top: 40px;
-  font-size: 12px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 520px) {
-  .card { width: 100%; padding: 100px 40px; }
-  h1 { font-size: 44px; }
-  .names { font-size: 55px; }
-}
-
 </style>
 </head>
 
@@ -251,21 +151,21 @@ h1 {
 <div class="card">
 
   <!-- CORNERS -->
-  <img class="corner-tl" src="BLT.PNG">
-  <img class="corner-tr" src="BRT.jpg">
-  <img class="corner-bl" src="BLB.jpg">
-  <img class="corner-br" src="BRB.jpg">
+  <img class="corner-tl" src="BLT.PNG" alt="">
+  <img class="corner-tr" src="BRT.jpg" alt="">
+  <img class="corner-bl" src="BLB.jpg" alt="">
+  <img class="corner-br" src="BRB.jpg" alt="">
 
   <!-- DECORATIVE LINES -->
-  <img class="decor-top" src="DecorLine.PNG">
-  <img class="decor-bottom" src="DecorLine.PNG">
+  <img class="decor-top" src="DecorLine.PNG" alt="">
+  <img class="decor-bottom" src="DecorLine.PNG" alt="">
 
   <!-- CONTENT -->
   <h1>WELCOME</h1>
 
   <div class="small">TO THE WEDDING OF</div>
 
-  <img class="tree" src="Tree.PNG">
+  <img class="tree" src="Tree.PNG" alt="">
 
   <div class="names">
     Bailey<br>
@@ -275,7 +175,7 @@ h1 {
   <div class="date">October 12, 2026</div>
 
   <div class="footer">
-    Thank you for celebrating with us!
+    THANK YOU FOR CELEBRATING WITH US!
   </div>
 
 </div>
