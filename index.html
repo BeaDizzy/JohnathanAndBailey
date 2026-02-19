@@ -35,6 +35,115 @@ body {
   width: 500px;
   background: white;
   position: relative;
+  padding: 160px 70px 160px 70px; /* MORE breathing room */
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+/* ===== CORNERS ===== */
+.corner-tl { position: absolute; top: 20px; left: 20px; width: 120px; }
+.corner-tr { position: absolute; top: 20px; right: 20px; width: 120px; }
+.corner-bl { position: absolute; bottom: 20px; left: 20px; width: 120px; }
+.corner-br { position: absolute; bottom: 20px; right: 20px; width: 120px; }
+
+/* ===== DECORATIVE LINES ===== */
+.decor-top {
+  position: absolute;
+  top: 120px;  /* moved down */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+}
+
+.decor-bottom {
+  position: absolute;
+  bottom: 120px; /* moved up */
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  width: 60%;
+}
+
+/* ===== VERTICAL LINES ===== */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  top: 200px;
+  bottom: 200px;
+  width: 1px;
+  background: rgba(105,59,24,0.4);
+}
+
+.card::before { left: 45px; }
+.card::after { right: 45px; }
+
+/* ===== TEXT ===== */
+
+h1 {
+  font-size: 56px;
+  letter-spacing: 6px;
+  margin-bottom: 40px; /* more space under welcome */
+  color: var(--wreath);
+}
+
+.small {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 25px;
+}
+
+.tree {
+  width: 90%;
+  opacity: 0.12;
+  margin: 30px auto;
+  display: block;
+}
+
+/* ===== NAMES ===== */
+.names {
+  font-family: 'Monsieur La Doulaise', cursive;
+  font-size: 75px;
+  margin-top: -190px;
+  position: relative;
+  z-index: 2;
+  color: var(--wreath);
+  line-height: 0.85;
+}
+
+.date {
+  margin-top: 200px;
+  font-size: 20px;
+  letter-spacing: 4px;
+  color: var(--meadow);
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 520px) {
+  .card { width: 100%; padding: 140px 40px; }
+  h1 { font-size: 44px; }
+  .names { font-size: 60px; }
+}
+  color: var(--petrichor);
+  display: flex;
+  justify-content: center;
+  padding: 60px 15px;
+}
+
+/* ===== CARD ===== */
+.card {
+  width: 500px;
+  background: white;
+  position: relative;
   padding: 120px 70px;
   text-align: center;
   box-shadow: 0 12px 40px rgba(0,0,0,0.08);
