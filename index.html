@@ -35,40 +35,25 @@ body{
   overflow:hidden;
 }
 
-/* ===== CORNERS ===== */
-
-.corner-tl,
-.corner-tr,
-.corner-bl,
-.corner-br{
+/* ===== CORNERS (USE SAME IMAGE + MIRROR) ===== */
+.corner{
   position:absolute;
   width:120px;
   z-index:1;
   pointer-events:none;
 }
 
-/* TOP CORNERS (force visual alignment) */
-.corner-tl{
-  top:20px;
-  left:20px;
-}
+/* Top-left */
+.corner-tl{ top:20px; left:20px; }
 
-.corner-tr{
-  top:20px;
-  right:20px;
-  transform: translateY(6px); /* adjust this number if needed */
-}
+/* Top-right = mirror the same BLT.PNG */
+.corner-tr{ top:20px; right:20px; transform: scaleX(-1); }
 
-/* BOTTOM CORNERS (already aligned) */
-.corner-bl{
-  bottom:20px;
-  left:20px;
-}
+/* Bottom-left */
+.corner-bl{ bottom:20px; left:20px; }
 
-.corner-br{
-  bottom:20px;
-  right:20px;
-}
+/* Bottom-right = mirror the same BLB.jpg */
+.corner-br{ bottom:20px; right:20px; transform: scaleX(-1); }
 
 /* ===== DECORATIVE LINES ===== */
 .decor-top,
@@ -104,8 +89,7 @@ body{
 .card::before{ left:55px; }
 .card::after { right:55px; }
 
-/* ===== TEXT ===== */
-
+/* ===== TEXT ON TOP ===== */
 h1, .small, .tree, .names, .date, .footer{
   position:relative;
   z-index:2;
@@ -156,6 +140,7 @@ h1{
   opacity:0.6;
 }
 
+/* Responsive */
 @media (max-width:520px){
   .card{ width:100%; padding:150px 40px 150px 40px; }
   h1{ font-size:44px; }
@@ -166,22 +151,25 @@ h1{
 </head>
 
 <body>
-
 <div class="card">
 
-  <img class="corner-tl" src="BLT.PNG">
-  <img class="corner-tr" src="BRT.jpg">
-  <img class="corner-bl" src="BLB.jpg">
-  <img class="corner-br" src="BRB.jpg">
+  <!-- TOP CORNERS: BOTH USE BLT.PNG -->
+  <img class="corner corner-tl" src="BLT.PNG" alt="">
+  <img class="corner corner-tr" src="BLT.PNG" alt="">
 
-  <img class="decor-top" src="DecorLine.PNG">
-  <img class="decor-bottom" src="DecorLine.PNG">
+  <!-- BOTTOM CORNERS: BOTH USE BLB.jpg -->
+  <img class="corner corner-bl" src="BLB.jpg" alt="">
+  <img class="corner corner-br" src="BLB.jpg" alt="">
 
+  <!-- DECORATIVE LINES -->
+  <img class="decor-top" src="DecorLine.PNG" alt="">
+  <img class="decor-bottom" src="DecorLine.PNG" alt="">
+
+  <!-- CONTENT -->
   <h1>WELCOME</h1>
-
   <div class="small">TO THE WEDDING OF</div>
 
-  <img class="tree" src="Tree.PNG">
+  <img class="tree" src="Tree.PNG" alt="">
 
   <div class="names">
     Bailey<br>
@@ -193,6 +181,5 @@ h1{
   <div class="footer">THANK YOU FOR CELEBRATING WITH US!</div>
 
 </div>
-
 </body>
 </html>
