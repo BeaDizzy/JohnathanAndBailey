@@ -39,21 +39,34 @@ body{
 .corner{
   position:absolute;
   width:120px;
+  height:120px;
+  object-fit: cover;
+  overflow: hidden;
   z-index:1;
   pointer-events:none;
 }
 
-/* Top-left */
-.corner-tl{ top:20px; left:20px; }
+/* TOP CORNERS — perfectly aligned */
+.corner-tl{
+  top:20px;
+  left:20px;
+}
 
-/* Top-right = mirror the same BLT.PNG */
-.corner-tr{ top:16px; right:20px; transform: scaleX(-1); }
+.corner-tr{
+  top:20px;
+  right:20px;
+}
 
-/* Bottom-left */
-.corner-bl{ bottom:20px; left:20px; }
+/* BOTTOM CORNERS */
+.corner-bl{
+  bottom:20px;
+  left:20px;
+}
 
-/* Bottom-right = mirror the same BLB.jpg */
-.corner-br{ bottom:20px; right:20px; transform: scaleX(-1); }
+.corner-br{
+  bottom:20px;
+  right:20px;
+}
 
 /* ===== DECORATIVE LINES ===== */
 .decor-top,
