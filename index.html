@@ -48,6 +48,7 @@ body{
 .corner-tr{ top:22px; right:22px; object-position: right top; }
 .corner-bl{ bottom:22px; left:22px; object-position: left bottom; }
 .corner-br{ bottom:22px; right:22px; object-position: right bottom; }
+
 /* ===== TOP DECOR LINE ONLY (keep this) ===== */
 .decor-top{
   position:absolute;
@@ -105,21 +106,21 @@ h1{
 /* ✅ ONLY divider under the date */
 .date-divider{
   width:52%;
-  margin:22px auto 60px; /* space BELOW so it never hits footer */
+  margin:22px auto 60px;
   display:block;
   opacity:0.95;
-  z-index:1; /* keep it behind footer text */
+  z-index:1;
 }
 
 .footer{
-  margin-top:0; /* because divider already gives spacing */
+  margin-top:0;
   font-size:12px;
   letter-spacing:3px;
   text-transform:uppercase;
   opacity:0.6;
 }
 
-/* ✅ Optional divider BELOW the footer text (not through it) */
+/* ✅ Optional divider BELOW the footer text */
 .footer-divider{
   width:52%;
   margin:18px auto 0;
@@ -144,7 +145,7 @@ h1{
 
   <!-- CORNERS -->
   <img class="corner corner-tl" src="BLT.PNG" alt="">
-  <img class="corner corner-tr" src="BRT.jpg" alt="">
+  <img class="corner corner-tr" src="BRT.PNG" alt="">
   <img class="corner corner-bl" src="BLB.jpg" alt="">
   <img class="corner corner-br" src="BRB.jpg" alt="">
 
