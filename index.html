@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,11 +15,16 @@
   --petrichor:#693B18;
 
   /* Border tuning */
-  --frame-inset: 26px;          /* distance of the border from the card edge (like Canva) */
+  --frame-inset: 22px;          /* distance of the border from the card edge */
   --corner-size: 84px;          /* corner image size */
   --stroke: 1px;                /* line thickness */
   --stroke-color: rgba(105,59,24,0.55);
+
+  /* Corner overlap tuning */
+  --corner-overhang: 0px;       /* make corners hug the outer edge more (try 6px) */
 }
+
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
@@ -31,6 +36,7 @@ body{
   padding:60px 15px;
 }
 
+/* Card */
 .card{
   width:500px;
   background:#fff;
@@ -42,7 +48,7 @@ body{
 }
 
 /* =========================
-   CANVA-STYLE FRAME (CSS)
+   CANVA-STYLE FRAME
    ========================= */
 .frame{
   position:absolute;
@@ -61,15 +67,8 @@ body{
   height:var(--stroke);
   background:var(--stroke-color);
 }
-
-/* top */
-.frame::before{
-  top:var(--frame-inset);
-}
-/* bottom */
-.frame::after{
-  bottom:var(--frame-inset);
-}
+.frame::before{ top:var(--frame-inset); }
+.frame::after { bottom:var(--frame-inset); }
 
 /* left & right lines */
 .frame .v{
@@ -83,21 +82,39 @@ body{
 .frame .v.right{ right:var(--frame-inset); }
 
 /* =========================
-   CORNERS (sit on top)
+   CORNERS
+   - use contain (not cover) so transparent PNGs don’t get cropped weird
+   - nudge with --corner-overhang if you want them closer to the card edge
    ========================= */
 .corner{
   position:absolute;
   width:var(--corner-size);
   height:auto;
+  object-fit:contain;
+  display:block;
   z-index:2;
   pointer-events:none;
 }
-.corner-tl{ top:var(--frame-inset); left:var(--frame-inset); }
-.corner-tr{ top:var(--frame-inset); right:var(--frame-inset); }
-.corner-bl{ bottom:var(--frame-inset); left:var(--frame-inset); }
-.corner-br{ bottom:var(--frame-inset); right:var(--frame-inset); }
+.corner-tl{
+  top:calc(var(--frame-inset) - var(--corner-overhang));
+  left:calc(var(--frame-inset) - var(--corner-overhang));
+}
+.corner-tr{
+  top:calc(var(--frame-inset) - var(--corner-overhang));
+  right:calc(var(--frame-inset) - var(--corner-overhang));
+}
+.corner-bl{
+  bottom:calc(var(--frame-inset) - var(--corner-overhang));
+  left:calc(var(--frame-inset) - var(--corner-overhang));
+}
+.corner-br{
+  bottom:calc(var(--frame-inset) - var(--corner-overhang));
+  right:calc(var(--frame-inset) - var(--corner-overhang));
+}
 
-/* ===== TOP DECOR ===== */
+/* =========================
+   TOP DECOR
+   ========================= */
 .decor-top{
   position:absolute;
   left:50%;
@@ -108,7 +125,9 @@ body{
   z-index:2;
 }
 
-/* ===== TEXT on top of everything ===== */
+/* =========================
+   TEXT LAYERS
+   ========================= */
 h1, .small, .tree, .names, .date, .date-divider, .footer, .footer-divider{
   position:relative;
   z-index:3;
@@ -151,12 +170,15 @@ h1{
   color:var(--meadow);
 }
 
+/* ✅ Divider under the date (kept simple so it never crosses text) */
 .date-divider{
   width:52%;
   margin:22px auto 60px;
   display:block;
+  opacity:0.95;
 }
 
+/* footer */
 .footer{
   font-size:12px;
   letter-spacing:3px;
@@ -164,22 +186,31 @@ h1{
   opacity:0.6;
 }
 
+/* ✅ Divider below footer */
 .footer-divider{
   width:52%;
   margin:18px auto 0;
   display:block;
+  opacity:0.95;
 }
 
+/* =========================
+   RESPONSIVE
+   ========================= */
 @media (max-width:520px){
-  .card{ width:100%; padding:150px 40px 170px 40px; }
+  .card{
+    width:100%;
+    padding:150px 40px 170px 40px;
+  }
   h1{ font-size:44px; }
   .names{ font-size:62px; margin-top:-185px; }
   .date{ margin-top:170px; }
   .date-divider, .footer-divider{ width:65%; }
 
   :root{
-    --frame-inset: 18px;
+    --frame-inset: 16px;   /* closer to edge on mobile */
     --corner-size: 70px;
+    --corner-overhang: 0px;
   }
 }
 </style>
@@ -189,12 +220,14 @@ h1{
 <div class="card">
 
   <!-- Canva-style frame lines -->
-  <div class="frame">
+  <div class="frame" aria-hidden="true">
     <div class="v left"></div>
     <div class="v right"></div>
   </div>
 
-  <!-- CORNERS (make sure these filenames match EXACTLY on GitHub) -->
+  <!-- CORNERS -->
+  <!-- IMPORTANT: GitHub Pages is case-sensitive. These must match your repo filenames EXACTLY. -->
+  <!-- If your file is BRT.PNG, src must be ./BRT.PNG (not .jpg, not .png). -->
   <img class="corner corner-tl" src="./BLT.PNG" alt="">
   <img class="corner corner-tr" src="./BRT.PNG" alt="">
   <img class="corner corner-bl" src="./BLB.PNG" alt="">
@@ -218,6 +251,7 @@ h1{
 
   <div class="footer">THANK YOU FOR CELEBRATING WITH US!</div>
   <img class="footer-divider" src="./DecorLine.PNG" alt="">
+
 </div>
 </body>
 </html>
