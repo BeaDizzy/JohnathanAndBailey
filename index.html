@@ -60,20 +60,6 @@ body{
   pointer-events:none;
 }
 
-/* ===== VERTICAL LINES ===== */
-.card::before,
-.card::after{
-  content:"";
-  position:absolute;
-  top:210px;
-  bottom:210px;
-  width:1px;
-  background:rgba(105,59,24,0.35);
-  z-index:0;
-}
-.card::before{ left:55px; }
-.card::after { right:55px; }
-
 /* ===== TEXT ON TOP ===== */
 h1, .small, .tree, .names, .date, .date-divider, .footer, .footer-divider{
   position:relative;
