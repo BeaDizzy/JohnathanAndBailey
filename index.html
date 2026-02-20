@@ -14,14 +14,12 @@
   --wreath:#31441E;
   --petrichor:#693B18;
 
-  /* ===== Border tuning (Canva-style) ===== */
+  /* Border tuning (Canva-style) */
   --frame-inset: 26px;                 /* distance from card edge */
   --corner-size: 84px;                 /* corner image size */
-  --stroke: 1px;                       /* line thickness */
-  --stroke-color: rgba(105,59,24,0.55);/* line color */
+  --stroke: 1px;                       /* border thickness */
+  --stroke-color: rgba(105,59,24,0.55);
 }
-
-*{ box-sizing:border-box; }
 
 body{
   margin:0;
@@ -50,10 +48,10 @@ body{
   position:absolute;
   inset:0;
   pointer-events:none;
-  z-index:1; /* behind corners + text */
+  z-index:1;
 }
 
-/* top + bottom lines */
+/* top & bottom lines */
 .frame::before,
 .frame::after{
   content:"";
@@ -63,10 +61,11 @@ body{
   height:var(--stroke);
   background:var(--stroke-color);
 }
-.frame::before{ top:var(--frame-inset); }
-.frame::after { bottom:var(--frame-inset); }
 
-/* left + right lines */
+.frame::before{ top:var(--frame-inset); }
+.frame::after{ bottom:var(--frame-inset); }
+
+/* left & right lines */
 .frame .v{
   position:absolute;
   top:var(--frame-inset);
@@ -78,19 +77,15 @@ body{
 .frame .v.right{ right:var(--frame-inset); }
 
 /* =========================
-   CORNERS (sit on top)
+   CORNERS
    ========================= */
 .corner{
   position:absolute;
   width:var(--corner-size);
-  height:var(--corner-size);
-  object-fit:contain;    /* IMPORTANT: don’t crop the ornament */
+  height:auto;
   z-index:2;
   pointer-events:none;
-
-  /* This hides the frame line behind the corner so it looks “connected”
-     (matches Canva look better) */
-  background:#fff;
+  display:block;            /* prevents weird inline spacing */
 }
 
 .corner-tl{ top:var(--frame-inset); left:var(--frame-inset); }
@@ -98,7 +93,7 @@ body{
 .corner-bl{ bottom:var(--frame-inset); left:var(--frame-inset); }
 .corner-br{ bottom:var(--frame-inset); right:var(--frame-inset); }
 
-/* ===== TOP DECOR ===== */
+/* ===== TOP DECOR flourish under WELCOME ===== */
 .decor-top{
   position:absolute;
   left:50%;
@@ -107,9 +102,10 @@ body{
   transform:translateX(-50%);
   pointer-events:none;
   z-index:2;
+  display:block;
 }
 
-/* ===== TEXT on top ===== */
+/* ===== TEXT layer on top ===== */
 h1, .small, .tree, .names, .date, .date-divider, .footer, .footer-divider{
   position:relative;
   z-index:3;
@@ -190,25 +186,26 @@ h1{
 <body>
 <div class="card">
 
-  <!-- Canva-style frame lines -->
-  <div class="frame" aria-hidden="true">
+  <!-- frame lines -->
+  <div class="frame">
     <div class="v left"></div>
     <div class="v right"></div>
   </div>
 
-  <!-- CORNERS (filenames MUST match exactly on GitHub Pages) -->
-  <img class="corner corner-tl" src="./BLT.PNG" alt="">
-  <img class="corner corner-tr" src="./BRT.PNG" alt="">
-  <img class="corner corner-bl" src="./BLB.PNG" alt="">
-  <img class="corner corner-br" src="./BRB.PNG" alt="">
+  <!-- CORNERS (FILENAMES MUST MATCH YOUR REPO EXACTLY) -->
+  <img class="corner corner-tl" src="BLT.PNG" alt="">
+  <img class="corner corner-tr" src="BRT.PNG" alt="">
+  <img class="corner corner-bl" src="BLB.jpg" alt="">
+  <img class="corner corner-br" src="BRB.jpg" alt="">
 
   <!-- TOP DECOR -->
-  <img class="decor-top" src="./DecorLine.PNG" alt="">
+  <img class="decor-top" src="DecorLine.PNG" alt="">
 
+  <!-- CONTENT -->
   <h1>WELCOME</h1>
   <div class="small">TO THE WEDDING OF</div>
 
-  <img class="tree" src="./Tree.PNG" alt="">
+  <img class="tree" src="Tree.PNG" alt="">
 
   <div class="names">
     Bailey<br>
@@ -216,10 +213,10 @@ h1{
   </div>
 
   <div class="date">October 12, 2026</div>
-  <img class="date-divider" src="./DecorLine.PNG" alt="">
+  <img class="date-divider" src="DecorLine.PNG" alt="">
 
   <div class="footer">THANK YOU FOR CELEBRATING WITH US!</div>
-  <img class="footer-divider" src="./DecorLine.PNG" alt="">
+  <img class="footer-divider" src="DecorLine.PNG" alt="">
 
 </div>
 </body>
