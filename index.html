@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,14 +14,11 @@
   --wreath:#31441E;
   --petrichor:#693B18;
 
-  /* Border tuning */
-  --frame-inset: 22px;          /* distance of the border from the card edge */
-  --corner-size: 84px;          /* corner image size */
-  --stroke: 1px;                /* line thickness */
-  --stroke-color: rgba(105,59,24,0.55);
-
-  /* Corner overlap tuning */
-  --corner-overhang: 0px;       /* make corners hug the outer edge more (try 6px) */
+  /* ===== Border tuning (Canva-style) ===== */
+  --frame-inset: 26px;                 /* distance from card edge */
+  --corner-size: 84px;                 /* corner image size */
+  --stroke: 1px;                       /* line thickness */
+  --stroke-color: rgba(105,59,24,0.55);/* line color */
 }
 
 *{ box-sizing:border-box; }
@@ -36,7 +33,6 @@ body{
   padding:60px 15px;
 }
 
-/* Card */
 .card{
   width:500px;
   background:#fff;
@@ -48,16 +44,16 @@ body{
 }
 
 /* =========================
-   CANVA-STYLE FRAME
+   CANVA-STYLE FRAME LINES
    ========================= */
 .frame{
   position:absolute;
   inset:0;
   pointer-events:none;
-  z-index:1;
+  z-index:1; /* behind corners + text */
 }
 
-/* top & bottom lines */
+/* top + bottom lines */
 .frame::before,
 .frame::after{
   content:"";
@@ -70,7 +66,7 @@ body{
 .frame::before{ top:var(--frame-inset); }
 .frame::after { bottom:var(--frame-inset); }
 
-/* left & right lines */
+/* left + right lines */
 .frame .v{
   position:absolute;
   top:var(--frame-inset);
@@ -82,39 +78,27 @@ body{
 .frame .v.right{ right:var(--frame-inset); }
 
 /* =========================
-   CORNERS
-   - use contain (not cover) so transparent PNGs don’t get cropped weird
-   - nudge with --corner-overhang if you want them closer to the card edge
+   CORNERS (sit on top)
    ========================= */
 .corner{
   position:absolute;
   width:var(--corner-size);
-  height:auto;
-  object-fit:contain;
-  display:block;
+  height:var(--corner-size);
+  object-fit:contain;    /* IMPORTANT: don’t crop the ornament */
   z-index:2;
   pointer-events:none;
-}
-.corner-tl{
-  top:calc(var(--frame-inset) - var(--corner-overhang));
-  left:calc(var(--frame-inset) - var(--corner-overhang));
-}
-.corner-tr{
-  top:calc(var(--frame-inset) - var(--corner-overhang));
-  right:calc(var(--frame-inset) - var(--corner-overhang));
-}
-.corner-bl{
-  bottom:calc(var(--frame-inset) - var(--corner-overhang));
-  left:calc(var(--frame-inset) - var(--corner-overhang));
-}
-.corner-br{
-  bottom:calc(var(--frame-inset) - var(--corner-overhang));
-  right:calc(var(--frame-inset) - var(--corner-overhang));
+
+  /* This hides the frame line behind the corner so it looks “connected”
+     (matches Canva look better) */
+  background:#fff;
 }
 
-/* =========================
-   TOP DECOR
-   ========================= */
+.corner-tl{ top:var(--frame-inset); left:var(--frame-inset); }
+.corner-tr{ top:var(--frame-inset); right:var(--frame-inset); }
+.corner-bl{ bottom:var(--frame-inset); left:var(--frame-inset); }
+.corner-br{ bottom:var(--frame-inset); right:var(--frame-inset); }
+
+/* ===== TOP DECOR ===== */
 .decor-top{
   position:absolute;
   left:50%;
@@ -125,9 +109,7 @@ body{
   z-index:2;
 }
 
-/* =========================
-   TEXT LAYERS
-   ========================= */
+/* ===== TEXT on top ===== */
 h1, .small, .tree, .names, .date, .date-divider, .footer, .footer-divider{
   position:relative;
   z-index:3;
@@ -170,15 +152,12 @@ h1{
   color:var(--meadow);
 }
 
-/* ✅ Divider under the date (kept simple so it never crosses text) */
 .date-divider{
   width:52%;
   margin:22px auto 60px;
   display:block;
-  opacity:0.95;
 }
 
-/* footer */
 .footer{
   font-size:12px;
   letter-spacing:3px;
@@ -186,31 +165,23 @@ h1{
   opacity:0.6;
 }
 
-/* ✅ Divider below footer */
 .footer-divider{
   width:52%;
   margin:18px auto 0;
   display:block;
-  opacity:0.95;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+/* Responsive */
 @media (max-width:520px){
-  .card{
-    width:100%;
-    padding:150px 40px 170px 40px;
-  }
+  .card{ width:100%; padding:150px 40px 170px 40px; }
   h1{ font-size:44px; }
   .names{ font-size:62px; margin-top:-185px; }
   .date{ margin-top:170px; }
   .date-divider, .footer-divider{ width:65%; }
 
   :root{
-    --frame-inset: 16px;   /* closer to edge on mobile */
+    --frame-inset: 18px;
     --corner-size: 70px;
-    --corner-overhang: 0px;
   }
 }
 </style>
@@ -225,9 +196,7 @@ h1{
     <div class="v right"></div>
   </div>
 
-  <!-- CORNERS -->
-  <!-- IMPORTANT: GitHub Pages is case-sensitive. These must match your repo filenames EXACTLY. -->
-  <!-- If your file is BRT.PNG, src must be ./BRT.PNG (not .jpg, not .png). -->
+  <!-- CORNERS (filenames MUST match exactly on GitHub Pages) -->
   <img class="corner corner-tl" src="./BLT.PNG" alt="">
   <img class="corner corner-tr" src="./BRT.PNG" alt="">
   <img class="corner corner-bl" src="./BLB.PNG" alt="">
