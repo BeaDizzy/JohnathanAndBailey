@@ -35,12 +35,55 @@ body{
   overflow:hidden;
 }
 
+/* =========================
+   FULL FRAME BORDER (NEW)
+   ========================= */
+.border-top{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:auto;
+  z-index:1;
+  pointer-events:none;
+}
+
+.border-bottom{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:auto;
+  z-index:1;
+  pointer-events:none;
+}
+
+.border-left{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:auto;
+  z-index:1;
+  pointer-events:none;
+}
+
+.border-right{
+  position:absolute;
+  top:0;
+  right:0;
+  height:100%;
+  width:auto;
+  z-index:1;
+  pointer-events:none;
+}
+
 /* ===== CORNERS ===== */
 .corner{
   position:absolute;
   width:72px;
   height:auto;
-  z-index:1;
+  z-index:2;          /* corners sit above lines */
   pointer-events:none;
 }
 .corner-tl{ top:0; left:0; }
@@ -56,9 +99,15 @@ body{
   width:60%;
   transform:translateX(-50%);
   pointer-events:none;
+  z-index:2;
 }
 
-/* ===== TEXT ===== */
+/* ===== TEXT (make sure it stays on top) ===== */
+h1, .small, .tree, .names, .date, .date-divider, .footer, .footer-divider{
+  position:relative;
+  z-index:3;
+}
+
 h1{
   font-size:56px;
   letter-spacing:6px;
@@ -122,12 +171,22 @@ h1{
   .names{ font-size:62px; margin-top:-185px; }
   .date{ margin-top:170px; }
   .date-divider, .footer-divider{ width:65%; }
+
+  /* If your side line PNGs are too thick on mobile, you can scale them down: */
+  /* .border-left, .border-right{ transform:scaleX(0.9); transform-origin:top; } */
 }
 </style>
 </head>
 
 <body>
 <div class="card">
+
+  <!-- FULL BORDER SIDES (NEW) -->
+  <!-- Rename these files to match what you actually have -->
+  <img class="border-top" src="./TopLine.PNG" alt="">
+  <img class="border-bottom" src="./BottomLine.PNG" alt="">
+  <img class="border-left" src="./LeftLine.PNG" alt="">
+  <img class="border-right" src="./RightLine.PNG" alt="">
 
   <!-- CORNERS -->
   <img class="corner corner-tl" src="./BLT.PNG" alt="">
