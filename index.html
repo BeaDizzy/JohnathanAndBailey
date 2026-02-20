@@ -29,13 +29,13 @@ body{
   width:500px;
   background:#fff;
   position:relative;
-  padding:170px 70px 180px 70px;
+  padding:170px 70px 170px 70px;
   text-align:center;
   box-shadow:0 12px 40px rgba(0,0,0,0.08);
   overflow:hidden;
 }
 
-/* ===== CORNERS (cropped to consistent box) ===== */
+/* ===== CORNERS ===== */
 .corner{
   position:absolute;
   width:120px;
@@ -44,31 +44,20 @@ body{
   z-index:1;
   pointer-events:none;
 }
-
 .corner-tl{ top:20px; left:20px; }
 .corner-tr{ top:20px; right:20px; }
 .corner-bl{ bottom:20px; left:20px; }
 .corner-br{ bottom:20px; right:20px; }
 
-/* ===== DECORATIVE LINES (top + bottom) ===== */
-.decor-top,
-.decor-bottom{
+/* ===== TOP DECOR LINE ONLY (keep this) ===== */
+.decor-top{
   position:absolute;
   left:50%;
+  top:145px;
   width:60%;
+  transform:translateX(-50%);
   z-index:0;
   pointer-events:none;
-}
-
-.decor-top{
-  top:145px;
-  transform:translateX(-50%);
-}
-
-/* Keep the bottom flourish DOWN near the footer area */
-.decor-bottom{
-  bottom:105px;
-  transform:translateX(-50%) rotate(180deg);
 }
 
 /* ===== VERTICAL LINES ===== */
@@ -86,7 +75,7 @@ body{
 .card::after { right:55px; }
 
 /* ===== TEXT ON TOP ===== */
-h1, .small, .tree, .names, .date, .date-divider, .footer{
+h1, .small, .tree, .names, .date, .date-divider, .footer, .footer-divider{
   position:relative;
   z-index:2;
 }
@@ -128,21 +117,30 @@ h1{
   color:var(--meadow);
 }
 
-/* NEW: a separate small divider under the date */
+/* ✅ ONLY divider under the date */
 .date-divider{
   width:52%;
-  margin:18px auto 0;
+  margin:22px auto 60px; /* space BELOW so it never hits footer */
   display:block;
   opacity:0.95;
+  z-index:1; /* keep it behind footer text */
 }
 
-/* Footer text sits above bottom flourish */
 .footer{
-  margin-top:55px;
+  margin-top:0; /* because divider already gives spacing */
   font-size:12px;
   letter-spacing:3px;
   text-transform:uppercase;
   opacity:0.6;
+}
+
+/* ✅ Optional divider BELOW the footer text (not through it) */
+.footer-divider{
+  width:52%;
+  margin:18px auto 0;
+  display:block;
+  opacity:0.95;
+  z-index:1;
 }
 
 /* Responsive */
@@ -151,7 +149,7 @@ h1{
   h1{ font-size:44px; }
   .names{ font-size:62px; margin-top:-185px; }
   .date{ margin-top:170px; }
-  .date-divider{ width:65%; }
+  .date-divider, .footer-divider{ width:65%; }
 }
 </style>
 </head>
@@ -165,12 +163,12 @@ h1{
   <img class="corner corner-bl" src="BLB.jpg" alt="">
   <img class="corner corner-br" src="BRB.jpg" alt="">
 
-  <!-- TOP & BOTTOM FLOURISH -->
+  <!-- TOP DECOR -->
   <img class="decor-top" src="DecorLine.PNG" alt="">
-  <img class="decor-bottom" src="DecorLine.PNG" alt="">
 
   <!-- CONTENT -->
   <h1>WELCOME</h1>
+
   <div class="small">TO THE WEDDING OF</div>
 
   <img class="tree" src="Tree.PNG" alt="">
@@ -181,11 +179,10 @@ h1{
   </div>
 
   <div class="date">October 12, 2026</div>
-
-  <!-- Divider UNDER the date (separate from bottom flourish) -->
   <img class="date-divider" src="DecorLine.PNG" alt="">
 
   <div class="footer">THANK YOU FOR CELEBRATING WITH US!</div>
+  <img class="footer-divider" src="DecorLine.PNG" alt="">
 
 </div>
 </body>
